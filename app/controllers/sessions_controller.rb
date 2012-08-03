@@ -2,7 +2,8 @@ class SessionsController < ApplicationController
 
   def create
     puts "***** SessionsController.create"
-    puts "***** auth: #{env['omniauth.auth']}"
+    puts "***** env: #{env}"
+    puts "***** session: #{session}"
     user = User.from_omniauth(env['omniauth.auth'])
     puts "***** user: #{user}"
     session[:user_id] = user.id
@@ -16,7 +17,9 @@ class SessionsController < ApplicationController
 
   def failure
     puts "***** SessionsController.failure"
-    puts "***** auth: #{env['omniauth.auth']}"
+    puts "***** env: #{env}"
+    puts "***** session: #{session}"
+    puts "***** stack: #{caller}"
   end
 
 end
