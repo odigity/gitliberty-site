@@ -12,8 +12,8 @@ end
 
 gem 'haml',     '>= 3.1.6'
 gem 'jquery-rails'
-gem 'mongoid',  '~> 3.0.1'
-gem 'moped',       '1.1.3'
+gem 'mongoid',     '3.0.1'
+gem 'moped',       '1.1.2'
 gem 'octokit'
 gem 'omniauth-github'
 
