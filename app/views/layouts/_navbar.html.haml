@@ -1,0 +1,19 @@
+.navbar.navbar-fixed-top
+  .navbar-inner
+    .container
+
+      / Logo
+      %a.brand(href="#{root_path}") GitLiberty.org
+
+      - if current_user
+        = link_to '<i class="icon-off icon-white"></i> Logout'.html_safe, logout_path, class: 'btn btn-danger pull-right'
+        %ul.nav.pull-right
+          %li= link_to "Logged in as #{current_user.name}", current_user.profile
+
+      - else
+        %ul.nav.pull-right
+          %li= link_to "Login with Github", "/auth/github"
+
+
+
+

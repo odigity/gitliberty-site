@@ -5,6 +5,8 @@ class User
   field :provider, type: String
   field :uid,      type: String
   field :name,     type: String
+  field :profile,  type: String
+  field :avatar,   type: String
 
   def self.from_omniauth(auth)
     where(auth.slice('provider', 'uid')).first || create_from_omniauth(auth)
@@ -15,6 +17,8 @@ class User
       user.provider = auth['provider']
       user.uid      = auth['uid']
       user.name     = auth['info']['name']
+      user.profile  = auth['info']['urls']['GitHub']
+      user.avatar   = auth['info']['image']
     end
   end
 end

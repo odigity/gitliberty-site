@@ -10,7 +10,6 @@ group :assets do
   gem 'uglifier',     '>= 1.0.3'
 end
 
-#gem 'devise',   '>= 2.1.0'
 gem 'haml',     '>= 3.1.6'
 gem 'jquery-rails'
 gem 'mongoid',  '~> 3.0.1'

@@ -1,0 +1,38 @@
+// Set the correct sprite paths
+$iconSpritePath: image-path('glyphicons-halflings.png');
+$iconWhiteSpritePath: image-path('glyphicons-halflings-white.png');
+
+// Set the Font Awesome (Font Awesome is default. You can disable by commenting below lines)
+// $fontAwesomeEotPath: '/assets/fontawesome-webfont.eot';
+// $fontAwesomeWoffPath: '/assets/fontawesome-webfont.woff';
+// $fontAwesomeTtfPath: '/assets/fontawesome-webfont.ttf';
+// $fontAwesomeSvgPath: '/assets/fontawesome-webfont.svg';
+
+// If you'd like to override bootstrap's own variables, you can do so here as well
+// See http://twitter.github.com/bootstrap/less.html for their names and documentation
+
+$gold: #d4af37;
+
+$navbarBrandColor:      $gold;
+$navbarLinkColor:        #eee;
+$navbarLinkColorHover:  $gold;
+$navbarLinkColorActive: $gold;
+
+// Import Twitter Bootstrap
+@import "bootstrap";
+@import "font-awesome";
+body { 
+	padding-top: 60px;
+	padding-left: 20px;
+}
+@import "bootstrap-responsive";
+
+// Since bootstrap was imported above you have access to its mixins which
+// you may use and inherit here
+
+// navbar
+
+.navbar .brand {
+  font-weight: bold;
+}
+
