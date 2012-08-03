@@ -16,10 +16,7 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    puts "***** SessionsController.failure"
-    puts "***** env: #{env}"
-    puts "***** session: #{session}"
-    puts "***** stack: #{caller}"
+    @foo = env
   end
 
 end
