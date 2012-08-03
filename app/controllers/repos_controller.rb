@@ -23,6 +23,13 @@ class ReposController < ApplicationController
     end
   end
 
+  def destroy
+    full_name = params[:id]
+    @repo = Repo.where(full_name: full_name).first
+    @repo.destroy
+    redirect_to root_url, notice: "Repository deleted."
+  end
+
   def vote
     full_name = params[:id]
     repo = Repo.where(full_name: full_name).first
@@ -47,6 +54,13 @@ class ReposController < ApplicationController
     else
       redirect_to :back, alert: "You forgot to type your comment before submitting it."
     end
+  end
+
+  def delete_comment
+    full_name = params[:repo_id]
+    repo = Repo.where(full_name: full_name).first
+    repo.comments.find(params[:id]).destroy
+    redirect_to :back, notice: "Comment deleted."
   end
 
 end

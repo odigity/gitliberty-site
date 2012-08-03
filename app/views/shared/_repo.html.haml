@@ -4,9 +4,11 @@
     #{repo.votes.to_s} <i class="icon-thumbs-up"></i><br/>
     - if current_user
       - if current_user.voted_on? repo
-        = button_to('Unvote', { controller: 'repos', id: repo.full_name, action: 'unvote' }, { class: 'btn btn-warning' })
+        = link_to '', { href: repo_unvote_path(repo), method: :post, class: 'btn btn-warning' } do
+          <i class="icon-thumbs-down icon-white"></i> Unvote
       - else
-        = button_to('Vote Up', { controller: 'repos', id: repo.full_name, action: 'vote' }, { class: 'btn btn-success' })
+        = link_to '', { href: repo_vote_path(repo), method: :post, class: 'btn btn-success' } do
+          <i class="icon-thumbs-up icon-white"></i> Vote Up
   .repository-full-name
     #{link_to repo.username, repo.owner_github_url} /
     %span.repository-name= link_to(repo.name, repo.github_url)
@@ -16,4 +18,8 @@
     %span.repository-language= "Language: " + repo.language
   %p.repository-comments
     = link_to "#{repo.comments_count} #{'comment'.pluralize(repo.comments_count)}", repo
+  - if current_user.try(:admin)
+    .admin
+      = link_to '', { href: repo_path(repo), :data => { :confirm => 'Are you sure?' }, method: :delete, class: 'btn-mini btn-danger btn' } do
+        <i class="icon-trash icon-white"></i> Delete
 

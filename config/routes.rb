@@ -7,10 +7,12 @@ Gitliberty::Application.routes.draw do
 
   match '/about',                   to: 'home#about',       as: 'about'
 
+  match '/repos/*repo_id/comments/:id', to: 'repos#delete_comment', via: :delete
   match '/repos/*id/vote',          to: 'repos#vote',       as: 'repo_vote',   via: :post
   match '/repos/*id/unvote',        to: 'repos#unvote',     as: 'repo_unvote', via: :post
   match '/repos/*id/comments',      to: 'repos#comment',    as: 'comments',    via: :post
-  match '/repos/*id',               to: 'repos#show',       as: 'repo'
+  match '/repos/*id',               to: 'repos#show',       as: 'repo',        via: :get
+  match '/repos/*id',               to: 'repos#destroy',    as: 'repo',        via: :delete
   resources :repos, only: [:create, :index]
 
   # The priority is based upon order of creation:

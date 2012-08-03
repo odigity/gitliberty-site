@@ -2,11 +2,12 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
-  field :_id,        type: String, default: ->{ login }
+  field :_id,        type: String,  default: ->{ login }
   field :login,      type: String
   field :name,       type: String
   field :avatar_url, type: String
-  field :voted_on,   type: Array,  default: []
+  field :voted_on,   type: Array,   default: []
+  field :admin,      type: Boolean, default: false
 
   def self.from_omniauth(auth)
     if Rails.env.production?

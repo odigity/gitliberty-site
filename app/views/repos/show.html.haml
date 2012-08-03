@@ -11,4 +11,8 @@
   .comment-card.well
     %p.body= comment.body
     %span.byline Posted by #{link_to comment.username, "http://github.com/" + comment.username} at #{comment.created_at}
+    - if current_user.try(:admin)
+      .admin
+        = link_to '', { href: "#{repo_path(@repo)}/comments/#{comment.id}", :data => { :confirm => 'Are you sure?' }, method: :delete, class: 'btn-mini btn-danger btn' } do
+          <i class="icon-trash icon-white"></i> Delete
 

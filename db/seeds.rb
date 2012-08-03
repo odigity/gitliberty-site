@@ -7,4 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Mongoid.purge!
+ofer = User.create_from_github_api('odigity')
+ofer.admin = true
+ofer.save!
 
