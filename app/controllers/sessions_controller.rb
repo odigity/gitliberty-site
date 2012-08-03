@@ -16,7 +16,6 @@ class SessionsController < ApplicationController
   end
 
   def failure
-    @foo = env
   end
 
 end
