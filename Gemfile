@@ -13,8 +13,8 @@ end
 gem 'haml',     '>= 3.1.6'
 gem 'jquery-rails'
 gem 'mongoid',  '~> 3.0.1'
+gem 'octokit'
 gem 'omniauth-github'
-gem 'simple_form'
 
 group :development, :test do
   gem 'database_cleaner', '>= 0.8.0'

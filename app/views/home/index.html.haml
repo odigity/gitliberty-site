@@ -1,1 +1,20 @@
-Hello world!
+
+- if current_user
+  = form_for Repo.new, :html => {:class => 'well form-inline'} do |f|
+    = f.text_field :full_name, class: 'input-xlarge', hint: "http://github.com/user/repo/"
+    = f.submit 'Add Repository to GitLiberty', class: 'btn btn-primary'
+
+- else
+  %p Please #{link_to 'login', '/auth/github'} with your GitHub account to add repositories to GitLiberty.
+
+- @repos.each do |repo|
+  .repository-card.well
+    .repository-watchers-count.pull-right <i class="icon-eye-open"></i> #{repo.watchers_count.to_s}
+    .repository-full-name
+      #{link_to repo.username, repo.owner_github_url} /
+      %span.repository-name= link_to(repo.name, repo.github_url)
+    %p.repository-description
+      = repo.description
+      |
+      %span.repository-language= "Language: " + repo.language
+
