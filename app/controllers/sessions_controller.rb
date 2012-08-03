@@ -11,4 +11,7 @@ class SessionsController < ApplicationController
     redirect_to root_url, notice: 'You have successfully logged out!'
   end
 
+  def failure
+  end
+
 end
