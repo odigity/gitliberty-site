@@ -14,13 +14,14 @@ class Repo
   field :name,           type: String
 
   field :submitted_by,   type: String
+  field :votes,          type: Integer, default: 0
 
   def self.parse_input(val)
     path = URI(val).path
     if path =~ /github.com/i
       path = path.sub(/.*github.com\//i, '')
     end
-    /^\/*(\w+\/\w+).*/.match(path)[1]
+    /^\/*([\w-]+\/[\w-]+).*/.match(path)[1]
   end
 
   def self.create_from_github_api(full_name, submitted_by)
@@ -46,4 +47,5 @@ class Repo
   def owner_github_url
     "http://github.com/" + username
   end
+
 end

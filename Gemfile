@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 ruby '1.9.3'
-gem 'rails', '3.2.6'
+gem 'rails', '~> 3.2.6'
 
 group :assets do
   gem 'bootstrap-sass'
@@ -10,12 +10,12 @@ group :assets do
   gem 'uglifier',     '>= 1.0.3'
 end
 
-gem 'haml',     '>= 3.1.6'
-gem 'jquery-rails'
-gem 'mongoid',     '3.0.1'
-gem 'moped',       '1.1.2'
-gem 'octokit'
-gem 'omniauth-github'
+gem 'haml',            '~> 3.1.6'
+gem 'jquery-rails',    '~> 2.0.2'
+gem 'mongoid',         '~> 3.0.3'
+gem 'moped',           '~> 1.2.0'
+gem 'octokit',         '~> 1.9.3'
+gem 'omniauth-github', '~> 1.0.2'
 
 group :development, :test do
   gem 'database_cleaner', '>= 0.8.0'

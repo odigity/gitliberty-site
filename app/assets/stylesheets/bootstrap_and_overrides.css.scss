@@ -41,12 +41,21 @@ body {
 .repository-card {
   background-color: #ffc;
   border: 1px solid #eeb;
-  font-size: 150%;
+  font-size: 120%;
+
+  .repository-stats {
+    text-align: right;
+    .btn {
+      margin-top: 10px;
+    }
+  }
 
   .repository-full-name {
+    font-size: 120%;
     margin-bottom: 20px;
     .repository-name {
-      font-size: 200%;
+      font-size: 150%;
+      font-weight: bold;
     }
   }
 

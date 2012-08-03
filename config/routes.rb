@@ -5,7 +5,12 @@ Gitliberty::Application.routes.draw do
   match '/auth/failure',            to: 'sessions#failure'
   match '/logout',                  to: 'sessions#destroy', as: 'logout'
 
-  resources :repos, only: [:create, :index, :show]
+  match '/about',                   to: 'home#about',       as: 'about'
+
+  match '/repos/*id/vote',          to: 'repos#vote',       as: 'repo_vote'
+  match '/repos/*id/unvote',        to: 'repos#unvote',     as: 'repo_unvote'
+  match '/repos/*id',               to: 'repos#show',       as: 'repo'
+  resources :repos, only: [:create, :index]
 
   # The priority is based upon order of creation:
   # first created -> highest priority.

@@ -6,8 +6,7 @@ class User
   field :login,      type: String
   field :name,       type: String
   field :avatar_url, type: String
-
-  has_many :repos
+  field :voted_on,   type: Array,  default: []
 
   def self.from_omniauth(auth)
     if Rails.env.production?
@@ -36,5 +35,23 @@ class User
 
   def github_url
     "http://github.com/" + login
+  end
+
+  def vote_on(repo)
+    unless voted_on? repo
+      repo.inc(:votes, 1)
+      push(:voted_on, repo.full_name)
+    end
+  end
+
+  def unvote_on(repo)
+    if voted_on? repo
+      repo.inc(:votes, -1)
+      pull(:voted_on, repo.full_name)
+    end
+  end
+
+  def voted_on?(repo)
+    voted_on.include? repo.full_name
   end
 end
