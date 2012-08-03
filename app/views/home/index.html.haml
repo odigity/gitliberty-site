@@ -15,10 +15,11 @@
     .repository-stats.pull-right
       #{repo.watchers_count.to_s} <i class="icon-eye-open"></i><br/>
       #{repo.votes.to_s} <i class="icon-thumbs-up"></i><br/>
-      - if current_user.voted_on? repo
-        = button_to('Unvote', { controller: 'repos', id: repo.full_name, action: 'unvote' }, { class: 'btn btn-warning' })
-      - else
-        = button_to('Vote Up', { controller: 'repos', id: repo.full_name, action: 'vote' }, { class: 'btn btn-success' })
+      - if current_user
+        - if current_user.voted_on? repo
+          = button_to('Unvote', { controller: 'repos', id: repo.full_name, action: 'unvote' }, { class: 'btn btn-warning' })
+        - else
+          = button_to('Vote Up', { controller: 'repos', id: repo.full_name, action: 'vote' }, { class: 'btn btn-success' })
     .repository-full-name
       #{link_to repo.username, repo.owner_github_url} /
       %span.repository-name= link_to(repo.name, repo.github_url)
