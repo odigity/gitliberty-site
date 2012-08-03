@@ -41,9 +41,9 @@ body {
 .repository-card {
   background-color: #ffc;
   border: 1px solid #eeb;
-  font-size: 120%;
 
   .repository-stats {
+    font-size: 120%;
     text-align: right;
     .btn {
       margin-top: 10px;
@@ -52,15 +52,29 @@ body {
 
   .repository-full-name {
     font-size: 120%;
-    margin-bottom: 20px;
     .repository-name {
       font-size: 150%;
       font-weight: bold;
     }
   }
 
-  .repository-language {
-    font-style: italic;
+  .repository-description {
+    font-size: 120%;
+    .repository-language {
+      font-style: italic;
+    }
+  }
+
+  p {
+    margin-top: 15px;
+  }
+}
+
+// comment cards
+
+.comment-card {
+  .body {
+    font-size: 120%;
   }
 }
 

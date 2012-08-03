@@ -7,8 +7,9 @@ Gitliberty::Application.routes.draw do
 
   match '/about',                   to: 'home#about',       as: 'about'
 
-  match '/repos/*id/vote',          to: 'repos#vote',       as: 'repo_vote'
-  match '/repos/*id/unvote',        to: 'repos#unvote',     as: 'repo_unvote'
+  match '/repos/*id/vote',          to: 'repos#vote',       as: 'repo_vote',   via: :post
+  match '/repos/*id/unvote',        to: 'repos#unvote',     as: 'repo_unvote', via: :post
+  match '/repos/*id/comments',      to: 'repos#comment',    as: 'comments',    via: :post
   match '/repos/*id',               to: 'repos#show',       as: 'repo'
   resources :repos, only: [:create, :index]
 

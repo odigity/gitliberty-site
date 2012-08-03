@@ -16,6 +16,9 @@ class Repo
   field :submitted_by,   type: String
   field :votes,          type: Integer, default: 0
 
+  embeds_many :comments
+  field :comments_count, type: Integer, default: 0
+
   def self.parse_input(val)
     path = URI(val).path
     if path =~ /github.com/i
@@ -47,5 +50,4 @@ class Repo
   def owner_github_url
     "http://github.com/" + username
   end
-
 end

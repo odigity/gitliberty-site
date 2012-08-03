@@ -1,6 +1,6 @@
 class HomeController < ApplicationController
   def index
-    @repos = Repo.asc(:name)
+    @repos = Repo.desc(:votes)
   end
 
   def about

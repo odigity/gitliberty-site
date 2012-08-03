@@ -5,6 +5,8 @@ class ReposController < ApplicationController
   end
 
   def show
+    full_name = params[:id]
+    @repo = Repo.where(full_name: full_name).first
   end
 
   def create
@@ -33,6 +35,18 @@ class ReposController < ApplicationController
     repo = Repo.where(full_name: full_name).first
     current_user.unvote_on(repo)
     redirect_to :back, notice: "You unvoted!"
+  end
+
+  def comment
+    comment = Comment.new(username: current_user.login, body: params[:comment][:body])
+    if comment.valid?
+      full_name = params[:id]
+      repo = Repo.where(full_name: full_name).first
+      repo.comments << comment
+      redirect_to :back, notice: "Comment posted."
+    else
+      redirect_to :back, alert: "You forgot to type your comment before submitting it."
+    end
   end
 
 end

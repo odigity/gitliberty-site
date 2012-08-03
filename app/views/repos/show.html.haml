@@ -1,0 +1,14 @@
+= render partial: 'shared/repo', object: @repo
+
+- if current_user
+  = form_for Comment.new, :html => {:class => 'well form-horizontal'} do |f|
+    = f.text_area :body, rows: 3, class: 'span10'
+    = f.submit 'Submit', class: 'btn btn-primary btn-large'
+- else
+  %p Please #{link_to 'login', '/auth/github'} with your GitHub account to add comment on this repository.
+
+- @repo.comments.each do |comment|
+  .comment-card.well
+    %p.body= comment.body
+    %span.byline Posted by #{link_to comment.username, "http://github.com/" + comment.username} at #{comment.created_at}
+

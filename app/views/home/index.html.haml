@@ -6,25 +6,8 @@
   = form_for Repo.new, :html => {:class => 'well form-inline'} do |f|
     = f.text_field :full_name, class: 'input-xlarge', hint: "http://github.com/user/repo/"
     = f.submit 'Add Repository to GitLiberty', class: 'btn btn-primary'
-
 - else
   %p Please #{link_to 'login', '/auth/github'} with your GitHub account to add repositories to GitLiberty.
 
-- @repos.each do |repo|
-  .repository-card.well
-    .repository-stats.pull-right
-      #{repo.watchers_count.to_s} <i class="icon-eye-open"></i><br/>
-      #{repo.votes.to_s} <i class="icon-thumbs-up"></i><br/>
-      - if current_user
-        - if current_user.voted_on? repo
-          = button_to('Unvote', { controller: 'repos', id: repo.full_name, action: 'unvote' }, { class: 'btn btn-warning' })
-        - else
-          = button_to('Vote Up', { controller: 'repos', id: repo.full_name, action: 'vote' }, { class: 'btn btn-success' })
-    .repository-full-name
-      #{link_to repo.username, repo.owner_github_url} /
-      %span.repository-name= link_to(repo.name, repo.github_url)
-    %p.repository-description
-      = repo.description
-      |
-      %span.repository-language= "Language: " + repo.language
+= render partial: 'shared/repo', collection: @repos
 
