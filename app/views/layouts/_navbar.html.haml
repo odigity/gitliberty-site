@@ -8,7 +8,7 @@
       - if current_user
         = link_to '<i class="icon-off icon-white"></i> Logout'.html_safe, logout_path, class: 'btn btn-danger pull-right'
         %ul.nav.pull-right
-          %li= link_to "Logged in as #{current_user.name}", current_user.github_url
+          %li= link_to "Logged in as #{current_user.login}", current_user.github_url
 
       - else
         %ul.nav.pull-right
