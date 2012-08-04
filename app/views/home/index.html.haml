@@ -7,7 +7,7 @@
     = f.text_field :full_name, class: 'input-xlarge', hint: "http://github.com/user/repo/"
     = f.submit 'Add Repository to GitLiberty', class: 'btn btn-primary'
 - else
-  %p Please #{link_to 'login', '/auth/github'} with your GitHub account to add repositories to GitLiberty.
+  %p Please #{link_to 'login', login_path} with your GitHub account to add repositories to GitLiberty.
 
 = render partial: 'shared/repo', collection: @repos
 
