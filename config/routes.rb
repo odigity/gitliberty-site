@@ -1,11 +1,11 @@
 Gitliberty::Application.routes.draw do
   root to: 'home#index'
 
-  match '/auth/login',              to: 'sessions#forward', as: 'login'
-  match '/auth/callback',           to: 'sessions#create'
-  match '/logout',                  to: 'sessions#destroy', as: 'logout'
+  match '/login',         to: 'sessions#forward', as: 'login'
+  match '/auth/callback', to: 'sessions#create'
+  match '/logout',        to: 'sessions#destroy', as: 'logout'
 
-  match '/about',                   to: 'home#about',       as: 'about'
+  match '/about',         to: 'home#about',       as: 'about'
 
   match '/repos/*repo_id/comments/:id', to: 'repos#delete_comment', via: :delete
   match '/repos/*id/vote',          to: 'repos#vote',       as: 'repo_vote',   via: :post
