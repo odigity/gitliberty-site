@@ -15,7 +15,8 @@ gem 'jquery-rails',    '~> 2.0.2'
 gem 'mongoid',         '~> 3.0.3'
 gem 'moped',           '~> 1.2.0'
 gem 'octokit',         '~> 1.9.3'
-gem 'omniauth-github', '~> 1.0.2'
+#gem 'omniauth-github', '~> 1.0.2'
+gem 'github-oauth'
 
 group :development, :test do
   gem 'database_cleaner', '>= 0.8.0'

@@ -1,8 +1,8 @@
 Gitliberty::Application.routes.draw do
   root to: 'home#index'
 
-  match '/auth/:provider/callback', to: 'sessions#create'
-  match '/auth/failure',            to: 'sessions#failure'
+  match '/auth/login',              to: 'sessions#forward', as: 'login'
+  match '/auth/callback',           to: 'sessions#create'
   match '/logout',                  to: 'sessions#destroy', as: 'logout'
 
   match '/about',                   to: 'home#about',       as: 'about'
