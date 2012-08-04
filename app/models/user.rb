@@ -9,24 +9,12 @@ class User
   field :voted_on,   type: Array,   default: []
   field :admin,      type: Boolean, default: false
 
-  def self.from_omniauth(auth)
-    if Rails.env.production?
-      where(login: auth['info']['nickname']).first || create_from_omniauth(auth)
-    else
-      where(login: auth['uid']).first || create_from_github_api(auth['uid'])
-    end
-  end
-
-  def self.create_from_omniauth(auth)
-    create! do |user|
-      user.login      = auth['info']['nickname']
-      user.name       = auth['info']['name']
-      user.avatar_url = auth['info']['image']
-    end
-  end
-
   def self.create_from_github_api(login)
     json = Octokit.user(login)
+    create_from_github_api_json(json)
+  end
+
+  def self.create_from_github_api_json(json)
     create! do |user|
       user.login      = json['login']
       user.name       = json['name']

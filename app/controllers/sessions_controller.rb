@@ -8,13 +8,18 @@ class SessionsController < ApplicationController
     access_token = GithubOAuth.token(ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], params[:code])
     response = HTTParty.get("https://api.github.com/user?access_token=#{access_token}")
     json = JSON.parse(response.body)
-    redirect_to root_url, notice: "You have successfully logged in! (login=#{json[:login]})"
-#    user = User.from_omniauth(env['omniauth.auth'])
-#    session[:user_id] = user.id
+
+    # create if doesn't exist yet
+    User.where(login: login).exists? or User.create_from_github_api_json(json)
+
+    # remember user between requests
+    session[:login] = login
+
+    redirect_to root_url, notice: "You have successfully logged in!"
   end
 
   def destroy
-    session[:user_id] = nil
+    session[:login] = nil
     redirect_to root_url, notice: 'You have successfully logged out!'
   end
 
