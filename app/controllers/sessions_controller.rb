@@ -8,6 +8,7 @@ class SessionsController < ApplicationController
     access_token = GithubOAuth.token(ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], params[:code])
     response = HTTParty.get("https://api.github.com/user?access_token=#{access_token}")
     json = JSON.parse(response.body)
+    login = json['login']
 
     # create if doesn't exist yet
     User.where(login: login).exists? or User.create_from_github_api_json(json)
