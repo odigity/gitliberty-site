@@ -1,0 +1,17 @@
+
+Repo.all.each do |repo|
+  puts "REPO: #{repo.full_name}"
+  json = Octokit.repository_events(repo.full_name, options)
+  json.each do |event|
+    next unless event['type'] == 'PushEvent'
+    puts "\tEVENT: #{event['type']}, #{event['id']}"
+
+    next if Push.where(push_id: event['id']).exists?
+
+    commits = event['payload']['commits'].map do |c|
+      Commit.new(sha: c['sha'], message: c['message'], github_url: "https://github.com/#{repo.full_name}/commit/#{c['sha']}")
+    end
+    Push.create!(push_id: event['id'], when: event['created_at'], repo_full_name: event['repo']['name'], commits: commits)
+  end
+end
+

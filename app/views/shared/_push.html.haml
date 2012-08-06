@@ -1,0 +1,7 @@
+.push-card.well
+  = link_to push.repo_full_name, repo_path(push.repo_full_name)
+  = push.when.to_formatted_s(:db)
+  %ul
+    - push.commits.each do |commit|
+      %li= link_to commit.message, commit.github_url
+

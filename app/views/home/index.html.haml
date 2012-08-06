@@ -9,5 +9,11 @@
 - else
   %p Please #{link_to 'login', login_path} with your GitHub account to add repositories to GitLiberty.
 
-= render partial: 'shared/repo', collection: @repos
+.row
+  .top_repos.span8.pull-left
+    %h2 Top 10 Repositories by Votes
+    = render partial: 'shared/repo', collection: @repos
+  .recent_commits.span4.pull-left
+    %h2 Recent Commits
+    = render partial: 'shared/push', collection: @pushes
 
