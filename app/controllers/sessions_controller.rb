@@ -19,7 +19,7 @@ class SessionsController < ApplicationController
     login = json['login']
 
     # create if doesn't exist yet
-    @current_user = User.where(login: login).exists? || User.create_from_github_api_json(json)
+    @current_user = User.where(login: login).first || User.create_from_github_api_json(json)
 
     # remember user between requests
     session[:login] = login
