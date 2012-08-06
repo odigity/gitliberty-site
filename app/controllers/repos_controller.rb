@@ -1,7 +1,12 @@
 class ReposController < ApplicationController
 
   def index
-    @repos = Repo.asc(:name)
+    if params[:lang]
+      @lang = params[:lang]
+      @repos = Repo.where(language: @lang).asc(:name)
+    else
+      @repos = Repo.asc(:name)
+    end
   end
 
   def show

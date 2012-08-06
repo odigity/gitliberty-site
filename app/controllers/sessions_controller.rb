@@ -1,7 +1,15 @@
 class SessionsController < ApplicationController
 
   def forward
-    redirect_to GithubOAuth.authorize_url(ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], false)
+    if Rails.env.development?
+      session[:login] = 'odigity'
+      @current_user = User.where(login: 'odigity').first
+      @current_user.last_login = Time.now
+      @current_user.save
+      redirect_to root_url, notice: "You have successfully logged in!"
+    else
+      redirect_to GithubOAuth.authorize_url(ENV['GITHUB_KEY'], ENV['GITHUB_SECRET'], false)
+    end
   end
 
   def create
@@ -11,10 +19,14 @@ class SessionsController < ApplicationController
     login = json['login']
 
     # create if doesn't exist yet
-    User.where(login: login).exists? or User.create_from_github_api_json(json)
+    @current_user = User.where(login: login).exists? or User.create_from_github_api_json(json)
 
     # remember user between requests
     session[:login] = login
+
+    # update last_login timestamp
+    @current_user.last_login = Time.now
+    @current_user.save
 
     redirect_to root_url, notice: "You have successfully logged in!"
   end

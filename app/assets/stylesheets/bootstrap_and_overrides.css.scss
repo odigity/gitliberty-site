@@ -41,10 +41,21 @@ body {
 .repository-card {
   background-color: #ffc;
   border: 1px solid #eeb;
+  min-height: 85px;
+
+  .owner-avatar {
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
 
   .repository-stats {
+    border-left: 2px solid #eeb;
     font-size: 120%;
+    padding-left: 10px;
     text-align: right;
+    span.votes {
+      margin-left: 20px;
+    }
     .btn {
       margin-top: 10px;
     }
@@ -55,6 +66,14 @@ body {
     .repository-name {
       font-size: 150%;
       font-weight: bold;
+    }
+    .repository-github-url {
+      margin-left: 20px;
+      font-size: 80%;
+    }
+    .repository-submitter {
+      margin-left: 20px;
+      font-size: 80%;
     }
   }
 
@@ -68,13 +87,48 @@ body {
   p {
     margin-top: 15px;
   }
+
+  .badge {
+    margin-left: 20px;
+    padding: 3px 5px;
+  }
 }
 
 // comment cards
 
 .comment-card {
+  min-height: 85px;
+  .owner-avatar {
+    margin-right: 20px;
+    margin-bottom: 20px;
+  }
   .body {
     font-size: 120%;
   }
 }
+
+// user cards
+
+.user-card {
+  background-color: #ffc;
+  border: 1px solid #eeb;
+  font-size: 120%;
+  min-height: 85px;
+
+  .user-login {
+    font-size: 150%;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+
+  .user-name {
+    margin-left: 10px;
+  }
+
+  .repository-list {
+    padding-left: 20px;
+    margin-top: 15px;
+  }
+}
+
 

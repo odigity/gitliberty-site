@@ -15,6 +15,8 @@ Gitliberty::Application.routes.draw do
   match '/repos/*id',               to: 'repos#destroy',    as: 'repo',        via: :delete
   resources :repos, only: [:create, :index]
 
+  resources :users, only: [:index, :show]
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

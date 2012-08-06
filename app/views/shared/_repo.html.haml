@@ -1,7 +1,10 @@
 .repository-card.well
+  .owner-avatar.pull-left= image_tag repo.owner.avatar_url
+
   .repository-stats.pull-right
-    #{repo.watchers_count.to_s} <i class="icon-eye-open"></i><br/>
-    #{repo.votes.to_s} <i class="icon-thumbs-up"></i><br/>
+    %span.watchers-count #{repo.watchers_count.to_s} <i class="icon-eye-open"></i>
+    %span.votes          #{repo.votes.to_s}          <i class="icon-thumbs-up"></i>
+    %br
     - if current_user
       - if current_user.voted_on? repo
         = link_to '', { href: repo_unvote_path(repo), method: :post, class: 'btn btn-warning' } do
@@ -9,15 +12,25 @@
       - else
         = link_to '', { href: repo_vote_path(repo), method: :post, class: 'btn btn-success' } do
           <i class="icon-thumbs-up icon-white"></i> Vote Up
+
   .repository-full-name
-    #{link_to repo.username, repo.owner_github_url} /
-    %span.repository-name= link_to(repo.name, repo.github_url)
+    %span.repository-username    #{link_to repo.username, user_path(repo.username)} /
+    %span.repository-name=       link_to(repo.name, repo)
+    %span.repository-github-url  (<i class="icon-share-alt"></i> #{link_to 'github', repo.github_url})
+    %span.repository-submitter   (submitted by #{link_to repo.submitted_by, user_path(repo.submitted_by)} on #{repo.created_at.to_date})
+
   %p.repository-description
     = repo.description
     |
     %span.repository-language= "Language: " + repo.language
+
   %p.repository-comments
     = link_to "#{repo.comments_count} #{'comment'.pluralize(repo.comments_count)}", repo
+    - if repo.username == current_user.try(:login)
+      %span.btn-danger.badge OWNER
+    - if repo.submitted_by == current_user.try(:login)
+      %span.btn-warning.badge SUBMITTER
+
   - if current_user.try(:admin)
     .admin
       = link_to '', { href: repo_path(repo), :data => { :confirm => 'Are you sure?' }, method: :delete, class: 'btn-mini btn-danger btn' } do

@@ -32,6 +32,10 @@ class Repo
     create!(json.slice(:full_name, :description, :language, :watchers_count).merge(submitted_by: submitted_by))
   end
 
+  def self.languages
+    all.distinct(:language).to_a.sort
+  end
+
   before_create do |repo|
     parts = full_name.split('/')
     repo._id      = full_name
@@ -47,7 +51,7 @@ class Repo
     "http://github.com/" + full_name
   end
 
-  def owner_github_url
-    "http://github.com/" + username
+  def owner
+    @owner ||= User.where(login: username).first
   end
 end

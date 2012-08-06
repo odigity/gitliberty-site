@@ -9,6 +9,7 @@
 
 - @repo.comments.each do |comment|
   .comment-card.well
+    .owner-avatar.pull-left= image_tag comment.owner.avatar_url
     %p.body= comment.body
     %span.byline Posted by #{link_to comment.username, "http://github.com/" + comment.username} at #{comment.created_at}
     - if current_user.try(:admin)

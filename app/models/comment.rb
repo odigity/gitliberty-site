@@ -16,4 +16,8 @@ class Comment
   before_destroy do |comment|
     comment.repo.inc(:comments_count, -1)
   end
+
+  def owner
+    @owner ||= User.where(login: username).first
+  end
 end

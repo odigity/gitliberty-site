@@ -5,15 +5,27 @@
       / Logo
       %a.brand(href="#{root_path}") GitLiberty.org
 
+      .btn-group.pull-left
+        %button.btn.btn-info{href: repos_path, onclick: "window.location.href=this.getAttribute('href');return false;"} Repositories
+        %button.btn.dropdown-toggle.btn-info(data-toggle="dropdown")
+          %span.caret
+        %ul.dropdown-menu
+          - Repo.languages.each do |lang|
+            %li= link_to lang, repos_path(lang: lang)
+
       - if current_user
         = link_to '<i class="icon-off icon-white"></i> Logout'.html_safe, logout_path, class: 'btn btn-danger pull-right'
         %ul.nav.pull-right
-          %li= link_to "Logged in as #{current_user.login}", current_user.github_url
+          %li= link_to "Logged in as #{current_user.login}", current_user
 
       - else
         %ul.nav.pull-right
           %li= link_to "Login with Github", login_path
 
+      %form.navbar-form.pull-right(action="https://www.paypal.com/cgi-bin/webscr" method="post")
+        %input(type="hidden" name="cmd" value="_s-xclick")
+        %input(type="hidden" name="hosted_button_id" value="YFT4NCADDPMBC")
+        %input(type="image" src="https://www.paypalobjects.com/en_US/i/btn/btn_donate_SM.gif" border="0" name="submit" alt="PayPal" style="width:74px; height:21px; margin-top:9px;")
 
 
 

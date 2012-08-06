@@ -1,0 +1,7 @@
+- if @lang
+  %p All repositories for language '#{@lang}':
+- else
+  %p All repositories:
+
+= render partial: 'shared/repo', collection: @repos
+

@@ -1,0 +1,16 @@
+.user-card.well
+  .user-avatar.pull-left= image_tag user.avatar_url
+  .user-info.pull-left
+    %span.user-login=  link_to user.login, user.github_url
+    - if user.name?
+      %span.user-name (#{user.name})
+    %br
+    - if user.repos?
+      %ul.repository-list
+        - user.repos.each do |repo|
+          %li
+            = link_to repo.name, repo
+            &mdash;
+            = repo.description
+
+

@@ -2,11 +2,16 @@ class User
   include Mongoid::Document
   include Mongoid::Timestamps
 
+  # for all Users (those who log in + owners of submitted repos)
   field :_id,        type: String,  default: ->{ login }
   field :login,      type: String
   field :name,       type: String
   field :avatar_url, type: String
+
+  # for Users who log in
+  field :last_login, type: DateTime
   field :voted_on,   type: Array,   default: []
+
   field :admin,      type: Boolean, default: false
 
   def self.create_from_github_api(login)
@@ -24,6 +29,14 @@ class User
 
   def github_url
     "http://github.com/" + login
+  end
+
+  def repos
+    Repo.where(username: login)
+  end
+
+  def repos?
+    Repo.where(username: login).exists?
   end
 
   def vote_on(repo)
