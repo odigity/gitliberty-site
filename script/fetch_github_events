@@ -8,8 +8,16 @@ Repo.all.each do |repo|
 
     next if Push.where(push_id: event['id']).exists?
 
-    commits = event['payload']['commits'].map do |c|
-      Commit.new(sha: c['sha'], message: c['message'], github_url: "https://github.com/#{repo.full_name}/commit/#{c['sha']}")
+    if event['payload']['commits'].present?
+      commits = event['payload']['commits'].map do |c|
+        Commit.new(sha: c['sha'], message: c['message'], github_url: "https://github.com/#{repo.full_name}/commit/#{c['sha']}")
+      end
+    elsif event['payload']['shas'].present?
+      commits = event['payload']['shas'].map do |s|
+        Commit.new(sha: s[0], message: s[2], github_url: "https://github.com/#{repo.full_name}/commit/#{s[0]}")
+      end
+    else
+      raise StandardError
     end
     Push.create!(push_id: event['id'], when: event['created_at'], repo_full_name: event['repo']['name'], commits: commits)
   end
