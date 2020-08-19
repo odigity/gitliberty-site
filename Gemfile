@@ -15,7 +15,7 @@ gem 'haml',            '~> 3.1.6'
 gem 'httparty'
 gem 'jquery-rails',    '~> 2.0.2'
 gem 'mongoid',         '~> 3.0.3'
-gem 'moped',           '~> 1.2.0'
+gem 'moped',           '~> 1.5.3'
 gem 'octokit',         '~> 1.9.3'
 
 group :development, :test do
